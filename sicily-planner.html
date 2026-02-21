@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sicily — July 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terracotta: #C4622D;
+    --sand: #F2E8D9;
+    --sienna: #8B3A1E;
+    --linen: #FAF4EC;
+    --ocean: #2A5F7F;
+    --seafoam: #6B9CAD;
+    --charcoal: #1C1C1C;
+    --warm-gray: #7A6E65;
+    --gold: #C9943A;
+    --olive: #4A5C2E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--linen);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background: var(--charcoal);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 50% 20%, rgba(196,98,45,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(42,95,127,0.3) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 30% at 20% 70%, rgba(201,148,58,0.2) 0%, transparent 40%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(242,232,217,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(242,232,217,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 1.2s ease forwards;
+  }
+
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 14vw, 11rem);
+    font-weight: 900;
+    line-height: 0.88;
+    color: var(--sand);
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(242,232,217,0.7);
+    margin-top: 1.5rem;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .meta-item {
+    text-align: center;
+  }
+
+  .meta-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    display: block;
+    line-height: 1;
+  }
+
+  .meta-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(242,232,217,0.5);
+    margin-top: 0.3rem;
+  }
+
+  .meta-divider {
+    width: 1px;
+    background: rgba(242,232,217,0.15);
+    align-self: stretch;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.5s forwards;
+  }
+
+  .scroll-cue span {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(242,232,217,0.4);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(196,98,45,0.8), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* NAV */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(28,28,28,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,98,45,0.2);
+    padding: 0 2rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .sticky-nav::-webkit-scrollbar { display: none; }
+
+  .nav-tab {
+    padding: 1rem 1.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(242,232,217,0.5);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+
+  .nav-tab:hover { color: var(--sand); }
+  .nav-tab.active {
+    color: var(--terracotta);
+    border-bottom-color: var(--terracotta);
+  }
+
+  /* MAIN CONTENT */
+  .main-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  /* DAY SECTION */
+  .day-section {
+    margin-bottom: 6rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+
+  .day-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .day-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .day-number-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--terracotta);
+    padding: 1.2rem 1.5rem;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+  }
+
+  .day-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--sand);
+    line-height: 1;
+  }
+
+  .day-word {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(242,232,217,0.7);
+  }
+
+  .day-title-group {
+    border-left: 3px solid var(--terracotta);
+    padding-left: 1.5rem;
+  }
+
+  .day-date {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 0.4rem;
+  }
+
+  .day-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.1;
+  }
+
+  .day-location-badge {
+    background: var(--ocean);
+    color: var(--sand);
+    padding: 0.5rem 1.2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 2px;
+    align-self: flex-start;
+  }
+
+  .day-location-badge.catania { background: var(--olive); }
+
+  /* TIMELINE */
+  .timeline {
+    display: grid;
+    gap: 0;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5.5rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--terracotta), transparent);
+    opacity: 0.3;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    position: relative;
+  }
+
+  .time-block {
+    text-align: right;
+    padding-top: 0.2rem;
+  }
+
+  .time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--terracotta);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: calc(6rem + 1.5rem - 0.35rem);
+    top: 1.9rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--terracotta);
+    box-shadow: 0 0 0 3px var(--linen), 0 0 0 4px rgba(196,98,45,0.3);
+  }
+
+  .activity-card {
+    background: white;
+    border-radius: 4px;
+    padding: 1.4rem 1.6rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+  }
+
+  .activity-card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    transform: translateX(4px);
+  }
+
+  .activity-card.food { border-left-color: var(--terracotta); }
+  .activity-card.sight { border-left-color: var(--ocean); }
+  .activity-card.travel { border-left-color: var(--gold); }
+  .activity-card.tip { border-left-color: var(--olive); }
+
+  .activity-type-pill {
+    display: inline-block;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+  }
+
+  .pill-food { background: rgba(196,98,45,0.1); color: var(--terracotta); }
+  .pill-sight { background: rgba(42,95,127,0.1); color: var(--ocean); }
+  .pill-travel { background: rgba(201,148,58,0.1); color: var(--gold); }
+  .pill-tip { background: rgba(74,92,46,0.1); color: var(--olive); }
+
+  .activity-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 0.4rem;
+  }
+
+  .activity-desc {
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+
+  .activity-meta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .activity-tag {
+    font-size: 0.72rem;
+    color: var(--warm-gray);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .activity-tag::before {
+    content: '·';
+    color: var(--terracotta);
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  /* RESTAURANT SECTION */
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,0,0,0.1);
+  }
+
+  .restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 4rem;
+  }
+
+  .restaurant-card {
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .restaurant-card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+  }
+
+  .restaurant-card-top {
+    background: var(--charcoal);
+    padding: 1.2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .restaurant-card-top::before {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background: rgba(196,98,45,0.15);
+  }
+
+  .restaurant-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--sand);
+    margin-bottom: 0.3rem;
+    position: relative;
+  }
+
+  .restaurant-location-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+  }
+
+  .restaurant-card-body {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.15rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .star {
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  .star.empty { color: rgba(0,0,0,0.15); }
+
+  .restaurant-vibe {
+    font-size: 0.83rem;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+  }
+
+  .restaurant-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .detail-chip {
+    background: var(--sand);
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    color: var(--charcoal);
+  }
+
+  /* ZTL WARNING */
+  .ztl-banner {
+    background: linear-gradient(135deg, #8B3A1E, #C4622D);
+    border-radius: 4px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ztl-banner::before {
+    content: '';
+    position: absolute;
+    top: -2rem;
+    right: -2rem;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .ztl-icon {
+    font-size: 2rem;
+    width: 3rem;
+    height: 3rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .ztl-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--sand);
+    margin-bottom: 0.6rem;
+  }
+
+  .ztl-content p {
+    font-size: 0.88rem;
+    color: rgba(242,232,217,0.85);
+    line-height: 1.7;
+  }
+
+  .ztl-content ul {
+    margin-top: 0.8rem;
+    padding-left: 1.2rem;
+    font-size: 0.85rem;
+    color: rgba(242,232,217,0.85);
+    line-height: 2;
+  }
+
+  /* FOOTER */
+  .trip-footer {
+    background: var(--charcoal);
+    color: var(--sand);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .trip-footer h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    font-style: italic;
+    color: var(--terracotta);
+    margin-bottom: 0.5rem;
+  }
+
+  .trip-footer p {
+    font-size: 0.85rem;
+    color: rgba(242,232,217,0.4);
+    letter-spacing: 0.1em;
+  }
+
+  /* DIVIDER */
+  .ornament-divider {
+    text-align: center;
+    margin: 4rem 0;
+    color: var(--terracotta);
+    font-size: 1.2rem;
+    letter-spacing: 1.5rem;
+    opacity: 0.4;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.6; }
+    50% { transform: scaleY(1.3); opacity: 1; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .day-header { grid-template-columns: auto 1fr; }
+    .day-location-badge { grid-column: 1 / -1; }
+    .timeline::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="eyebrow">A journey through</div>
+    <h1 class="hero-title">Si<em>ci</em>ly</h1>
+    <p class="hero-subtitle">Taormina · Catania — July 2025</p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-num">4</span>
+        <div class="meta-label">Nights</div>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <span class="meta-num">2</span>
+        <div class="meta-label">Cities</div>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <span class="meta-num">8</span>
+        <div class="meta-label">Restaurants</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <button class="nav-tab active" onclick="scrollToDay('day1')">Day 1</button>
+  <button class="nav-tab" onclick="scrollToDay('day2')">Day 2</button>
+  <button class="nav-tab" onclick="scrollToDay('day3')">Day 3</button>
+  <button class="nav-tab" onclick="scrollToDay('day4')">Day 4</button>
+  <button class="nav-tab" onclick="scrollToDay('restaurants')">Restaurants</button>
+  <button class="nav-tab" onclick="scrollToDay('driving')">Driving Tips</button>
+</nav>
+
+<!-- MAIN -->
+<main class="main-content">
+
+  <!-- ZTL WARNING -->
+  <div id="driving" class="ztl-banner">
+    <div class="ztl-icon">🚗</div>
+    <div class="ztl-content">
+      <h3>Driving Notes for Sicily</h3>
+      <p>You're renting a car — smart move for flexibility. A few things to know before you hit the road:</p>
+      <ul>
+        <li><strong>Taormina ZTL:</strong> The historic center is a restricted zone (ZTL). Park at Lumbi or Porta Catania parking lots and walk in — or take the cable car. Cameras are active 24/7.</li>
+        <li><strong>Catania ZTL:</strong> City center has ZTL zones, especially around Via Etnea and Piazza del Duomo. Use peripheral parking + walk or taxi.</li>
+        <li><strong>Taormina → Catania:</strong> ~1hr on the A18/E45 autostrada. Straightforward drive.</li>
+        <li><strong>Parking tip:</strong> Search "Parcheggio Lumbi Taormina" — it connects directly to town by escalators and is the easiest option.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== DAY 1 ===================== -->
+  <section id="day1" class="day-section">
+    <div class="day-header">
+      <div class="day-number-block">
+        <div class="day-num">01</div>
+        <div class="day-word">Day</div>
+      </div>
+      <div class="day-title-group">
+        <div class="day-date">Arrival Day · Taormina</div>
+        <div class="day-title">Settle in,<br>wander slowly</div>
+      </div>
+      <div class="day-location-badge">Taormina</div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card travel">
+          <div class="activity-type-pill pill-travel">Travel</div>
+          <div class="activity-name">Arrive in Taormina</div>
+          <div class="activity-desc">Pick up rental car at Catania airport, drive ~1hr north on A18. Park at Parcheggio Lumbi — ride the escalators up into town. Check in and decompress.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">5PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card sight">
+          <div class="activity-type-pill pill-sight">Explore</div>
+          <div class="activity-name">Piazza IX Aprile — First sunset</div>
+          <div class="activity-desc">The main square with its black-and-white checkered piazza looks directly over the Ionian Sea with Etna looming in the distance. Perfect place to arrive. Order an Aperol Spritz at one of the terrace bars.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">Free</span>
+            <span class="activity-tag">Best at golden hour</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">8PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card food">
+          <div class="activity-type-pill pill-food">Dinner</div>
+          <div class="activity-name">Osteria da Rita — First night feast</div>
+          <div class="activity-desc">Iconic, lively, loud, and worth the wait. Live accordion music, Sicilian classics, incredible pasta. Expect a line — get there at 8 sharp or put your name in early. Get the Pasta da Rita and the meatballs.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">€€ · Casual</span>
+            <span class="activity-tag">Closed Wednesdays</span>
+            <span class="activity-tag">No reservations — queue</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament-divider">✦ ✦ ✦</div>
+
+  <!-- ===================== DAY 2 ===================== -->
+  <section id="day2" class="day-section">
+    <div class="day-header">
+      <div class="day-number-block">
+        <div class="day-num">02</div>
+        <div class="day-word">Day</div>
+      </div>
+      <div class="day-title-group">
+        <div class="day-date">Full Day · Taormina</div>
+        <div class="day-title">Ancient theater,<br>clifftop views</div>
+      </div>
+      <div class="day-location-badge">Taormina</div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">9AM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card food">
+          <div class="activity-type-pill pill-food">Breakfast</div>
+          <div class="activity-name">Liola Osteria — Slow morning</div>
+          <div class="activity-desc">Opens at 8AM. Family-run, beloved, known for their cannoli made with local ricotta. Perfect for a long Sicilian breakfast before the heat of the day.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">€€</span>
+            <span class="activity-tag">Closed Wednesdays</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">10AM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card sight">
+          <div class="activity-type-pill pill-sight">Must-see</div>
+          <div class="activity-name">Teatro Antico di Taormina</div>
+          <div class="activity-desc">The ancient Greek-Roman theater is Taormina's centerpiece. Open from 9AM. Framed by Etna, the Ionian coast, and mainland Italy in the distance. Go early to beat the crowds — it gets busy by 11AM. Budget 1.5–2 hours.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">Open 9AM–4PM</span>
+            <span class="activity-tag">€10 entry</span>
+            <span class="activity-tag">Book ahead in July</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">1PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card food">
+          <div class="activity-type-pill pill-food">Lunch</div>
+          <div class="activity-name">Taverna Don Nino — Pistachio pasta pilgrimage</div>
+          <div class="activity-desc">The best pistachio pasta in Taormina. Queue-worthy, cheap, no-frills. Famous for the Etna wine at €5/glass. This is the meal people talk about when they talk about Taormina.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">€ · Budget-friendly</span>
+            <span class="activity-tag">Usually only open Sundays for lunch — check ahead</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">3PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card sight">
+          <div class="activity-type-pill pill-sight">Adventure</div>
+          <div class="activity-name">Castello di Taormina — The climb</div>
+          <div class="activity-desc">A steep 30-minute hike above town to the medieval castle with 360° views of the sea, Etna, Calabria, and the theater below. Go in the afternoon when the light is soft. Not worth it if 38°C — skip and revisit the piazza instead.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">€10 entry</span>
+            <span class="activity-tag">30 min hike up</span>
+            <span class="activity-tag">Worth it for views</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">8PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card food">
+          <div class="activity-type-pill pill-food">Dinner</div>
+          <div class="activity-name">Vineria Modì — Michelin-starred splurge</div>
+          <div class="activity-desc">A Michelin-starred gem tucked on a side street. Female chef, exceptional tasting menu, outstanding sommelier. Book the 6-course degustation. This is the special dinner of the trip — reserve well in advance.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">€€€€ · Michelin Star</span>
+            <span class="activity-tag">Tue–Sun from 7PM</span>
+            <span class="activity-tag">Reservations essential</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament-divider">✦ ✦ ✦</div>
+
+  <!-- ===================== DAY 3 ===================== -->
+  <section id="day3" class="day-section">
+    <div class="day-header">
+      <div class="day-number-block">
+        <div class="day-num">03</div>
+        <div class="day-word">Day</div>
+      </div>
+      <div class="day-title-group">
+        <div class="day-date">Drive South · Catania</div>
+        <div class="day-title">Lava city,<br>fish market chaos</div>
+      </div>
+      <div class="day-location-badge catania">Catania</div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">AM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card travel">
+          <div class="activity-type-pill pill-travel">Drive</div>
+          <div class="activity-name">Taormina → Catania (~1 hour)</div>
+          <div class="activity-desc">Head south on the A18. Scenic coastal drive with Etna always to the west. Park at a hotel garage or use one of the peripheral lots near the historic center — don't try to drive into Piazza del Duomo.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">10AM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card sight">
+          <div class="activity-type-pill pill-sight">Explore</div>
+          <div class="activity-name">Fontana dell'Elefante & Piazza del Duomo</div>
+          <div class="activity-desc">The black lava elephant is Catania's symbol — ancient, quirky, beloved. The piazza around it has Baroque architecture built from Etna's lava stone. Grab a granita at one of the bars on the square.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">Free</span>
+            <span class="activity-tag">Open 24 hours</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">11AM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card sight">
+          <div class="activity-type-pill pill-sight">Culture</div>
+          <div class="activity-name">Basilica Cattedrale di Sant'Agata</div>
+          <div class="activity-desc">Free to enter. Stunning Baroque interior — Saint Agata's story is told in beautiful panels. Bellini (the composer) is buried here. Open 7AM–7PM daily.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">Free entry</span>
+            <span class="activity-tag">7AM–7PM</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">1PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card food">
+          <div class="activity-type-pill pill-food">Lunch</div>
+          <div class="activity-name">Ciauru i mari — Best-of-trip meal</div>
+          <div class="activity-desc">4.8 stars, 2,600+ reviews — and it earns every one. Raw seafood platter, lobster linguine, incredible dessert. Staff explain Sicilian heritage with genuine passion. Open all day, which is rare and useful. Ask for Andrea.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">€€ · Seafood-forward</span>
+            <span class="activity-tag">Open 11AM–11:30PM daily</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">4PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card sight">
+          <div class="activity-type-pill pill-sight">Wander</div>
+          <div class="activity-name">Villa Bellini — Escape the heat</div>
+          <div class="activity-desc">The city's beautiful hilltop garden park with panoramic views of Etna. Busts of famous Sicilians line the paths. Shaded benches, classical music sometimes playing. A calm pocket in a busy city.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">Free</span>
+            <span class="activity-tag">6AM–10PM</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">8PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card food">
+          <div class="activity-type-pill pill-food">Dinner</div>
+          <div class="activity-name">L'Oste Pazzo — Local favorite</div>
+          <div class="activity-desc">Wildly popular with locals, nearly impossible to find a bad word about it. The fish set menu at ~€18/person is a steal. Squid ink pasta, pasta alla Norma. Go Tue–Sat (closed Mondays).</div>
+          <div class="activity-meta">
+            <span class="activity-tag">€ · Incredible value</span>
+            <span class="activity-tag">Closed Mondays</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament-divider">✦ ✦ ✦</div>
+
+  <!-- ===================== DAY 4 ===================== -->
+  <section id="day4" class="day-section">
+    <div class="day-header">
+      <div class="day-number-block">
+        <div class="day-num">04</div>
+        <div class="day-word">Day</div>
+      </div>
+      <div class="day-title-group">
+        <div class="day-date">Last Day · Catania</div>
+        <div class="day-title">Linger long,<br>leave late</div>
+      </div>
+      <div class="day-location-badge catania">Catania</div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">9AM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card food">
+          <div class="activity-type-pill pill-food">Morning</div>
+          <div class="activity-name">Morning granita at Piazza del Duomo</div>
+          <div class="activity-desc">The Sicilian morning: brioche con gelato or granita di mandorla (almond granita). Grab it from one of the bars right on the piazza and watch the city wake up.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">10AM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card tip">
+          <div class="activity-type-pill pill-tip">Optional</div>
+          <div class="activity-name">La Pescheria — Fish Market (if open)</div>
+          <div class="activity-desc">Catania's famous fish market runs weekday mornings near Piazza del Duomo. Chaotic, aromatic, theatrical — vendors shouting, swordfish on ice, locals bartering. Even if you're not buying, it's a full sensory experience. Goes until ~1PM.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">Weekday mornings only</span>
+            <span class="activity-tag">Free to browse</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">1PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card food">
+          <div class="activity-type-pill pill-food">Farewell Lunch</div>
+          <div class="activity-name">Putì or Tantikkia — Last meal</div>
+          <div class="activity-desc">Two excellent options for a final lunch. Putì has a small curated menu of whatever's fresh — sea urchin pasta, oysters, horse steak. Tantikkia is great for octopus and swordfish with a lively outdoor terrace. Both on Via Etnea / nearby.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">€€</span>
+            <span class="activity-tag">Both open for lunch</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-block"><div class="time">PM</div></div>
+        <div class="timeline-dot"></div>
+        <div class="activity-card travel">
+          <div class="activity-type-pill pill-travel">Departure</div>
+          <div class="activity-name">Head to Catania Airport (CTA)</div>
+          <div class="activity-desc">Catania Fontanarossa airport is only 15–20 minutes from the city center. Return the rental car and you're done. Budget 1.5hrs before your flight to be safe.</div>
+          <div class="activity-meta">
+            <span class="activity-tag">~20 min from city center</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESTAURANT ROUNDUP -->
+  <div id="restaurants">
+    <div class="section-label">All restaurants at a glance</div>
+    <div class="restaurant-grid">
+
+      <div class="restaurant-card">
+        <div class="restaurant-card-top">
+          <div class="restaurant-name">Osteria da Rita</div>
+          <div class="restaurant-location-tag">Taormina · Day 1 Dinner</div>
+        </div>
+        <div class="restaurant-card-body">
+          <div class="stars">★★★★<span class="star empty">★</span></div>
+          <div class="restaurant-vibe">Live accordion, legendary pasta, authentic vibe. Expect a queue — it's worth it.</div>
+          <div class="restaurant-details">
+            <span class="detail-chip">€€</span>
+            <span class="detail-chip">No reservations</span>
+            <span class="detail-chip">Closed Wed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card">
+        <div class="restaurant-card-top">
+          <div class="restaurant-name">Vineria Modì</div>
+          <div class="restaurant-location-tag">Taormina · Day 2 Dinner</div>
+        </div>
+        <div class="restaurant-card-body">
+          <div class="stars">★★★★★</div>
+          <div class="restaurant-vibe">Michelin-starred tasting menu. The splurge dinner. Book the 6-course degustation months ahead.</div>
+          <div class="restaurant-details">
+            <span class="detail-chip">€€€€</span>
+            <span class="detail-chip">Book ahead</span>
+            <span class="detail-chip">Tue–Sun, 7PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card">
+        <div class="restaurant-card-top">
+          <div class="restaurant-name">Liola Osteria</div>
+          <div class="restaurant-location-tag">Taormina · Day 2 Breakfast</div>
+        </div>
+        <div class="restaurant-card-body">
+          <div class="stars">★★★★★</div>
+          <div class="restaurant-vibe">Best cannoli in Taormina, scampi ravioli, lobster pasta. Family-run with genuine warmth.</div>
+          <div class="restaurant-details">
+            <span class="detail-chip">€€</span>
+            <span class="detail-chip">Open 8AM</span>
+            <span class="detail-chip">Closed Wed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card">
+        <div class="restaurant-card-top">
+          <div class="restaurant-name">Taverna Don Nino</div>
+          <div class="restaurant-location-tag">Taormina · Lunch</div>
+        </div>
+        <div class="restaurant-card-body">
+          <div class="stars">★★★★<span class="star empty">★</span></div>
+          <div class="restaurant-vibe">Pistachio pasta and €5 Etna wine. Budget-friendly, queue-worthy, the most local-feeling spot.</div>
+          <div class="restaurant-details">
+            <span class="detail-chip">€</span>
+            <span class="detail-chip">Check hours</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card">
+        <div class="restaurant-card-top">
+          <div class="restaurant-name">Ciauru i mari</div>
+          <div class="restaurant-location-tag">Catania · Day 3 Lunch</div>
+        </div>
+        <div class="restaurant-card-body">
+          <div class="stars">★★★★★</div>
+          <div class="restaurant-vibe">4.8 stars. Raw seafood crudo, lobster linguine. Don't skip dessert. Ask for Andrea.</div>
+          <div class="restaurant-details">
+            <span class="detail-chip">€€</span>
+            <span class="detail-chip">Open daily 11AM–11:30PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card">
+        <div class="restaurant-card-top">
+          <div class="restaurant-name">L'Oste Pazzo</div>
+          <div class="restaurant-location-tag">Catania · Day 3 Dinner</div>
+        </div>
+        <div class="restaurant-card-body">
+          <div class="stars">★★★★★</div>
+          <div class="restaurant-vibe">€18 fish set menu, brilliant value. Squid ink pasta, pasta alla Norma, fast service.</div>
+          <div class="restaurant-details">
+            <span class="detail-chip">€</span>
+            <span class="detail-chip">Closed Mon</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card">
+        <div class="restaurant-card-top">
+          <div class="restaurant-name">Putì</div>
+          <div class="restaurant-location-tag">Catania · Day 4 Lunch</div>
+        </div>
+        <div class="restaurant-card-body">
+          <div class="stars">★★★★<span class="star empty">★</span></div>
+          <div class="restaurant-vibe">Small curated daily menu. Sea urchin pasta, oysters, horse steak. Elegant and intimate.</div>
+          <div class="restaurant-details">
+            <span class="detail-chip">€€</span>
+            <span class="detail-chip">Closed Thu</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="restaurant-card">
+        <div class="restaurant-card-top">
+          <div class="restaurant-name">Tantìkkia</div>
+          <div class="restaurant-location-tag">Catania · Alternative Day 4</div>
+        </div>
+        <div class="restaurant-card-body">
+          <div class="stars">★★★★<span class="star empty">★</span></div>
+          <div class="restaurant-vibe">Octopus with potato purée, swordfish, lively terrace. Good wine list. Open daily.</div>
+          <div class="restaurant-details">
+            <span class="detail-chip">€€</span>
+            <span class="detail-chip">Open daily</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="trip-footer">
+  <h2>Buon viaggio</h2>
+  <p>Sicily · July 2025 · 4 nights</p>
+</footer>
+
+<script>
+  // Scroll to section
+  function scrollToDay(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  // Intersection observer for day sections
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.day-section').forEach(section => {
+    observer.observe(section);
+  });
+
+  // Update active nav on scroll
+  const sections = ['day1','day2','day3','day4','restaurants','driving'];
+  const navTabs = document.querySelectorAll('.nav-tab');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top < 200) {
+        current = id;
+      }
+    });
+    navTabs.forEach((tab, i) => {
+      tab.classList.toggle('active', sections[i] === current);
+    });
+  });
+</script>
+
+</body>
+</html>
