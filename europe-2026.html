@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Europe Summer 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0d0b;
+    --paper: #f5f0e8;
+    --cream: #ede7d5;
+    --gold: #c9a84c;
+    --rust: #b5472a;
+    --sage: #4a6741;
+    --sky: #2c5f7a;
+    --muted: #8a8070;
+    --line: #d4cbba;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .masthead {
+    border-bottom: 2px solid var(--ink);
+    padding: 3rem 4rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 2rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .masthead-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .masthead-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .masthead-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: var(--muted);
+    text-align: right;
+    line-height: 2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .masthead-meta strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* TIMELINE CONTAINER */
+  .timeline {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 4rem 6rem;
+  }
+
+  /* ALERT BANNER */
+  .alert-bar {
+    background: var(--rust);
+    color: #fff;
+    padding: 0.85rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 3px solid #8c2e14;
+  }
+
+  .alert-bar .dot {
+    width: 8px; height: 8px;
+    background: #ffcc00;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  /* SECTION DIVIDERS */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 2.5rem 0 1rem;
+    border-top: 1px solid var(--line);
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* SEGMENT CARD */
+  .segment {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0 2.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .segment.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .seg-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.15rem;
+    line-height: 1.8;
+  }
+
+  .seg-date .day-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+    display: block;
+    letter-spacing: -0.02em;
+  }
+
+  .seg-date .month-yr {
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  .seg-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+  }
+
+  .seg-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: 0.6rem;
+  }
+
+  .seg-title em { font-style: italic; color: var(--rust); }
+
+  .seg-detail {
+    font-size: 0.95rem;
+    color: #3a3530;
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .seg-detail strong { font-weight: 600; }
+
+  .seg-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.8rem;
+  }
+
+  .chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid;
+    border-radius: 2px;
+  }
+
+  .chip-sky { border-color: var(--sky); color: var(--sky); }
+  .chip-sage { border-color: var(--sage); color: var(--sage); }
+  .chip-gold { border-color: var(--gold); color: var(--gold); }
+  .chip-rust { border-color: var(--rust); color: var(--rust); }
+  .chip-muted { border-color: var(--muted); color: var(--muted); }
+
+  /* FLIGHT SEGMENT SPECIAL LAYOUT */
+  .flight-route {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.6rem 0;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .airport {
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .airport small {
+    display: block;
+    font-size: 0.58rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  .route-arrow {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+
+  .route-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--muted), transparent 30%, transparent 70%, var(--muted));
+    position: relative;
+  }
+
+  .route-line::after {
+    content: '✈';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* ACTION NEEDED */
+  .action-needed {
+    background: #fff8e7;
+    border: 1.5px solid var(--gold);
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.25rem;
+    margin-top: 0.8rem;
+    font-size: 0.88rem;
+  }
+
+  .action-needed .action-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  /* BOOKING REF */
+  .booking-ref {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-top: 0.6rem;
+  }
+
+  .booking-ref strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* GAP / UNKNOWN */
+  .gap-segment {
+    grid-template-columns: 140px 1fr;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(0,0,0,0.02) 10px,
+      rgba(0,0,0,0.02) 20px
+    );
+    border: 1.5px dashed var(--line);
+    padding: 1.5rem 2rem;
+    margin: 1rem 0;
+    display: grid;
+    gap: 0 2.5rem;
+    opacity: 0.8;
+  }
+
+  /* FOOTER */
+  .trip-footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    border-top: 3px solid var(--gold);
+  }
+
+  .footer-col h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #2a2820;
+  }
+
+  .footer-col p {
+    font-size: 0.9rem;
+    color: #a09880;
+    line-height: 1.8;
+  }
+
+  .footer-col p strong { color: var(--paper); font-weight: 400; }
+
+  @media (max-width: 768px) {
+    .masthead { padding: 2rem; grid-template-columns: 1fr; }
+    .masthead-meta { text-align: left; }
+    .timeline { padding: 2rem; }
+    .segment, .gap-segment { grid-template-columns: 1fr; }
+    .seg-date { display: flex; align-items: baseline; gap: 0.5rem; }
+    .seg-date .day-num { font-size: 1.8rem; }
+    .trip-footer { grid-template-columns: 1fr; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="alert-bar">
+  <span class="dot"></span>
+  <span>2 tickets require personalization — FunHouse Sunday (deadline Aug 2) &amp; World Pride After (deadline Aug 3)</span>
+</div>
+
+<div class="masthead">
+  <div>
+    <div class="masthead-title">Europe<br><em>Summer</em> 2026</div>
+  </div>
+  <div class="masthead-meta">
+    <strong>Jul 22 → Aug 4</strong><br>
+    Venice · Taormina<br>
+    Amsterdam<br>
+    World Pride<br>
+    <strong>14 Nights</strong>
+  </div>
+</div>
+
+<div class="timeline">
+
+  <!-- OUTBOUND FLIGHT -->
+  <div class="section-label">Departure</div>
+
+  <div class="segment">
+    <div class="seg-date">
+      <span class="day-num">22</span>
+      <span class="month-yr">Jul · Wed</span>
+    </div>
+    <div class="seg-body">
+      <div class="seg-type">Outbound Flight · KLM</div>
+      <div class="seg-title">San Francisco <em>→</em> Venice</div>
+      <div class="flight-route">
+        <div class="airport">SFO<small>1:45 PM</small></div>
+        <div class="route-arrow"><div class="route-line"></div></div>
+        <div class="airport">AMS<small>9:05 AM +1</small></div>
+        <div class="route-arrow"><div class="route-line"></div></div>
+        <div class="airport">VCE<small>10:20 PM</small></div>
+      </div>
+      <div class="seg-chips">
+        <span class="chip chip-sky">Premium Comfort · 11C</span>
+        <span class="chip chip-muted">Economy · 21C (AMS→VCE)</span>
+        <span class="chip chip-muted">$750.20</span>
+      </div>
+      <div class="booking-ref">Booking <strong>X4PQ6N</strong> · Ticket 0742134929255</div>
+    </div>
+  </div>
+
+  <!-- VENICE -->
+  <div class="section-label">Venice</div>
+
+  <div class="gap-segment">
+    <div class="seg-date">
+      <span class="day-num">23–26</span>
+      <span class="month-yr">Jul</span>
+    </div>
+    <div class="seg-body">
+      <div class="seg-type">Accommodation · Unconfirmed</div>
+      <div class="seg-title">Venice Stay <em>— 4 Nights</em></div>
+      <div class="seg-detail">No hotel confirmation found in email. Verify booking or check Booking.com / hotels.com account directly.</div>
+      <div class="seg-chips">
+        <span class="chip chip-rust">⚠ Verify Accommodation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VENICE → CATANIA -->
+  <div class="section-label">Sicily</div>
+
+  <div class="segment">
+    <div class="seg-date">
+      <span class="day-num">27</span>
+      <span class="month-yr">Jul · Mon</span>
+    </div>
+    <div class="seg-body">
+      <div class="seg-type">Flight · KLM KL1671</div>
+      <div class="seg-title">Antwerp <em>→</em> Catania</div>
+      <div class="flight-route">
+        <div class="airport">ANR<small>Train 9:30 AM</small></div>
+        <div class="route-arrow"><div class="route-line"></div></div>
+        <div class="airport">AMS<small>10:30 AM</small></div>
+        <div class="route-arrow"><div class="route-line"></div></div>
+        <div class="airport">CTA<small>3:30 PM</small></div>
+      </div>
+      <div class="seg-chips">
+        <span class="chip chip-muted">Economy</span>
+        <span class="chip chip-muted">$346.70</span>
+      </div>
+      <div class="booking-ref">Booking <strong>XSNUJG</strong></div>
+    </div>
+  </div>
+
+  <div class="segment">
+    <div class="seg-date">
+      <span class="day-num">27–29</span>
+      <span class="month-yr">Jul</span>
+    </div>
+    <div class="seg-body">
+      <div class="seg-type">Hotel · Taormina</div>
+      <div class="seg-title">Casa Monir</div>
+      <div class="seg-detail">Via Vecchio Macello 6, 98039 Taormina · <strong>Two-Bedroom Standard Apartment</strong></div>
+      <div class="seg-detail">Check-in Jul 27, 3–10 PM · Check-out Jul 29, 10–11 AM · PIN: <strong>3692</strong></div>
+      <div class="seg-detail">Contact: +39 348 896 2827</div>
+      <div class="seg-chips">
+        <span class="chip chip-sage">Confirmed</span>
+        <span class="chip chip-muted">€335.86 total · Non-refundable</span>
+      </div>
+      <div class="booking-ref">Booking.com <strong>#6923773166</strong></div>
+    </div>
+  </div>
+
+  <!-- CATANIA → AMSTERDAM -->
+  <div class="section-label">Amsterdam · World Pride</div>
+
+  <div class="segment">
+    <div class="seg-date">
+      <span class="day-num">31</span>
+      <span class="month-yr">Jul · Fri</span>
+    </div>
+    <div class="seg-body">
+      <div class="seg-type">Flight · Transavia HV5216</div>
+      <div class="seg-title">Catania <em>→</em> Amsterdam</div>
+      <div class="flight-route">
+        <div class="airport">CTA<small>8:40 AM</small></div>
+        <div class="route-arrow"><div class="route-line"></div></div>
+        <div class="airport">AMS<small>11:50 AM</small></div>
+      </div>
+      <div class="seg-detail">Direct · 3h 10m · Seat <strong>2D</strong></div>
+      <div class="seg-chips">
+        <span class="chip chip-sky">Economy</span>
+        <span class="chip chip-muted">1x Carry-on · 1x Checked (30kg)</span>
+      </div>
+      <div class="booking-ref">Booking <strong>GDBKPJ</strong></div>
+    </div>
+  </div>
+
+  <!-- FUNHOUSE SATURDAY -->
+  <div class="segment">
+    <div class="seg-date">
+      <span class="day-num">1</span>
+      <span class="month-yr">Aug · Sat</span>
+    </div>
+    <div class="seg-body">
+      <div class="seg-type">World Pride · FunHouse</div>
+      <div class="seg-title">FunHouse <em>Saturday</em></div>
+      <div class="seg-detail">WesterWeelde, Amsterdam · Doors 10:00 PM CEST</div>
+      <div class="seg-detail"><strong>VIP Entrance</strong> · €52.02</div>
+      <div class="seg-chips">
+        <span class="chip chip-sage">✓ Personalized</span>
+        <span class="chip chip-gold">VIP</span>
+      </div>
+      <div class="booking-ref">Order <strong>154137456</strong></div>
+    </div>
+  </div>
+
+  <!-- FUNHOUSE SUNDAY + AFTER -->
+  <div class="segment">
+    <div class="seg-date">
+      <span class="day-num">2</span>
+      <span class="month-yr">Aug · Sun</span>
+    </div>
+    <div class="seg-body">
+      <div class="seg-type">World Pride · FunHouse + After</div>
+      <div class="seg-title">FunHouse <em>Sunday</em> + World Pride After</div>
+      <div class="seg-detail">WesterWeelde, Amsterdam · Doors 1:00 PM CEST (day) / 11:59 PM CEST (after)</div>
+      <div class="seg-chips">
+        <span class="chip chip-gold">VIP Fast Lane · €52.02</span>
+        <span class="chip chip-muted">Regular · €26.52</span>
+      </div>
+      <div class="action-needed">
+        <div class="action-label">⚠ Action Required — Personalize Tickets</div>
+        <div>FunHouse Sunday (Order <strong>159255783</strong>) — deadline <strong>Aug 2, 8:00 PM CEST</strong></div>
+        <div style="margin-top:0.3rem">World Pride After (Order <strong>157784950</strong>) — deadline <strong>Aug 3, 5:00 AM CEST</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RETURN FLIGHT -->
+  <div class="section-label">Return</div>
+
+  <div class="segment">
+    <div class="seg-date">
+      <span class="day-num">4</span>
+      <span class="month-yr">Aug · Tue</span>
+    </div>
+    <div class="seg-body">
+      <div class="seg-type">Return Flight · KLM KL0615 · Award</div>
+      <div class="seg-title">Amsterdam <em>→</em> Portland</div>
+      <div class="flight-route">
+        <div class="airport">AMS<small>10:25 AM</small></div>
+        <div class="route-arrow"><div class="route-line"></div></div>
+        <div class="airport">PDX<small>11:10 AM</small></div>
+      </div>
+      <div class="seg-chips">
+        <span class="chip chip-gold">World Business Class · 08K</span>
+        <span class="chip chip-muted">2x Checked (32kg each)</span>
+        <span class="chip chip-sky">Flying Blue Award</span>
+      </div>
+      <div class="booking-ref">Booking <strong>Z79ILB</strong> · Ticket 0742135286200 · FF 005093834641</div>
+    </div>
+  </div>
+
+</div><!-- /timeline -->
+
+<div class="trip-footer">
+  <div class="footer-col">
+    <h4>Flights</h4>
+    <p>
+      <strong>SFO → VCE</strong> · Jul 22 · KLM X4PQ6N<br>
+      <strong>ANR → CTA</strong> · Jul 27 · KLM XSNUJG<br>
+      <strong>CTA → AMS</strong> · Jul 31 · Transavia GDBKPJ<br>
+      <strong>AMS → PDX</strong> · Aug 4 · KLM Z79ILB
+    </p>
+  </div>
+  <div class="footer-col">
+    <h4>Hotels</h4>
+    <p>
+      <strong>Venice</strong> · Jul 23–27 · ⚠ Unconfirmed<br>
+      <strong>Taormina</strong> · Jul 27–29 · Casa Monir<br>
+      &nbsp;&nbsp;Booking #6923773166 · PIN 3692<br>
+      <strong>Amsterdam</strong> · Jul 31–Aug 4 · Confirm
+    </p>
+  </div>
+  <div class="footer-col">
+    <h4>Action Items</h4>
+    <p>
+      <strong>⚠ Personalize</strong> FunHouse Sun #159255783<br>
+      &nbsp;&nbsp;Deadline: Aug 2, 8:00 PM CEST<br>
+      <strong>⚠ Personalize</strong> WP After #157784950<br>
+      &nbsp;&nbsp;Deadline: Aug 3, 5:00 AM CEST<br>
+      <strong>⚠ Verify</strong> Venice hotel (Jul 23–27)
+    </p>
+  </div>
+</div>
+
+<script>
+  // Animate segments on scroll
+  const segments = document.querySelectorAll('.segment');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  segments.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
